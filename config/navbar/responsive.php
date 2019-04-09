@@ -26,11 +26,11 @@ return [
                         "url" => "redovisning/kmom01",
                         "title" => "Redovisning för kmom01.",
                     ],
-                    [
-                        "text" => "Kmom02",
-                        "url" => "redovisning/kmom02",
-                        "title" => "Redovisning för kmom02.",
-                    ],
+                    // [
+                    //     "text" => "Kmom02",
+                    //     "url" => "redovisning/kmom02",
+                    //     "title" => "Redovisning för kmom02.",
+                    // ],
                 ],
             ],
         ],
@@ -53,6 +53,11 @@ return [
             "text" => "Test &amp; Lek",
             "url" => "lek",
             "title" => "Testa och lek med test- och exempelprogram",
+        ],
+        [
+            "text" => "Test Markdown",
+            "url" => "test",
+            "title" => "Testa olika markdown grejer",
         ],
         [
             "text" => "Anax dev",

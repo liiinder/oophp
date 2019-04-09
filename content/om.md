@@ -19,10 +19,8 @@ views:
 Om
 =========================
 
-Detta innehåll är skrivet i markdown och du hittar innehållet i filen `content/om.md`.
+Denna sidan görs som redovisningssida till kursen oophp v5.
 
-Skriv några kloka ord om kursen?
+I kursen kommer vi fokusera på objektorientering i programmeringsspråket PHP. Framförallt OO i webbaserade ramverk med lite databas och enhetstestning.
 
-Lägg till en fin och representativ bild för kursen, enligt ditt eget val.
-
-[FIGURE src=image/car.png?w=740&filter=grayscale&f1=colorize,0,30,0,0 caption="En fin bil som demobild, lite oklart hur den är representativ, men ändå..."]
+[FIGURE src=image/desk.jpg?a=5,0,5,0 caption="Mitt skrivbord hemma i Åre. Den fuldragna HDMI kabeln sticker lite i ögat."]

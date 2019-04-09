@@ -1,0 +1,147 @@
+/*!
+ * LESS version of the stylesheet for design kmom01.
+ *
+ * This stylesheet is for the design course and kmom01. Its intention is to
+ * use less and build the style using modules like base, layout, responsive etc.
+ * In this kmom we're going to learn about vertical grid.
+ */
+
+/**
+ * Normalize and reset the style.
+ */
+@import "normalize.css/normalize.less";
+
+/**
+ * Internal self contained modules, save in directory module/.
+ */
+@import "module/stylechooser.less";  // Just an example module
+
+/**
+ * Figure and figcaption for images and other media using figure/figcaption
+ */
+@import "@desinax/figure/less/asciinema.less";
+@import "@desinax/figure/less/codepen.less";
+@import "@desinax/figure/less/figure.less";
+
+// Enable style from the module and optinally add customized layout
+figure.figure {
+    #desinax-figure.figure();
+}
+
+figure.asciinema {
+    &:extend(figure.figure);
+    #desinax-figure.asciinema();
+}
+
+figure.codepen,
+figure.figure-codepen {
+    &:extend(figure.figure);
+    #desinax-figure.codepen();
+}
+
+/**
+ * Font Awesome.
+ */
+@import "@fortawesome/fontawesome-free/less/fontawesome.less";
+@import "@fortawesome/fontawesome-free/less/solid.less";
+@import "@fortawesome/fontawesome-free/less/brands.less";
+
+/**
+ * A responsive menu.
+ */
+@import "@desinax/responsive-menu/less/responsive-menu.less";
+@import "@desinax/responsive-menu/less/media-queries.less";
+
+/**
+* Import the vertical grid.
+*/
+@import "@desinax/vertical-grid/less/grid.less";
+
+/**
+* Import the typographic grid.
+*/
+@import "@desinax/typographic-grid/less/typography-font-families.less";
+@import "@desinax/typographic-grid/less/typography-defaults.less";
+
+/**
+ * Base style to affect HTML elements on a general scale.
+ */
+// @import "base/base_default.less";
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background: url(../../htdocs/img/balconies-beach-blue-water-1167021.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+
+body {
+    color: @darkGrey;
+    #desinax-hgrid.font(@fontSizeBody);
+}
+
+// Activate grid and affect all typographic elements
+#desinax-hgrid.activateDefaultTypography();
+
+/* Texts */
+a {
+    color: @darkGrey;
+    text-decoration-color: @darkGreen;
+}
+
+code {
+    background: @primaryGreen;
+    border: 1px solid @darkGreen;
+}
+
+// h4 {
+//     border-bottom: 1px solid @darkGrey;
+// }
+
+/**
+* Layout style for general structure of header, navbar, main, footer
+* and other regions of the page including route specific styles.
+*/
+@import "layout/layout_default.less";
+@import "layout/responsive_default.less";
+@import "layout/regions.less";     // To add style for ?regions
+
+/**
+ * My own settings, not currently in their own module.
+ */
+
+/* variables */
+@lightGreen: #b0d996;
+@primaryGreen: #e7f3df;
+@darkGreen: #3383a4;
+@primaryColor: rgba(255, 255, 255, 0.65);
+@boxShadow: 0 0 35px 0px rgba(0, 0, 0, 0.3);
+@lightGrey: #eee;
+@darkGrey: #333;
+@maxWidth: 1100px; // width of page (flash to footer)
+
+// Default grid, change to fit your requirements.
+@columnWidth:   30;
+@gutterWidth:   10;
+@columns:       12;
+@gridType:      "float"; // "flex"
+
+// .footer-column {
+//     background-color: @lightGreen;
+// }
+
+@magicNumber:  24px;
+@fontSizeBody: 16px;
+@fontFamilyHeadings: "Verdana";
+@fontFamilyBody:     "sans-serif";
+@fontFamilyCode:     "monospace";
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    border-bottom: 1px solid @darkGrey;
+}

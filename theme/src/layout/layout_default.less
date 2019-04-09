@@ -1,0 +1,235 @@
+/**
+ * Layout style for general structure of header, navbar, main, footer
+ * and other regions of the page including route specific styles.
+ */
+
+/* General */
+
+// Show the grid
+.vgrid .inner-wrap {
+    //@gridImage: "../img/grid_24x30x10-nomargin.png";
+    @gridImage: "../img/grid_12x60x20-nomargin.png";
+    #desinax-vgrid.showGrid(@gridImage, @maxWidth);
+
+    &.inner-wrap-header,
+    &.inner-wrap-footer {
+        #desinax-vgrid.showGrid(@gridImage);
+    }
+}
+
+.hgrid .inner-wrap {
+    @gridImage: "../img/magic-number-@{magicNumber}.png";
+    #desinax-hgrid.showGrid(@gridImage);
+}
+
+.inner-wrap {
+    #desinax-vgrid.grid(@maxWidth);
+    background-color: @primaryColor;
+    box-shadow: @boxShadow;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.row {
+    #desinax-vgrid.row(); 
+    margin-bottom: 12px;
+}
+
+.row::after {
+    content:"";
+    display:block;
+    clear:both;
+}
+
+//
+/* Header */
+//
+.region-header {
+    margin-top: 12px;
+    #desinax-vgrid.column(@columns);
+}
+
+// site logo
+.region-header-col-1 {
+    display: none;
+}
+
+// main menu
+.region-header-col-2 {
+    #desinax-vgrid.column(@columns);
+    text-align: center;
+}
+
+// responsive menu
+.region-header-col-3 {
+    display: none;
+}
+
+.site-logo-text a {
+    text-decoration: none;
+}
+
+.my-navbar li {
+    display: inline-block;
+}
+
+.inner-wrap-header {
+    background-color: @primaryColor;
+}
+
+ul .my-navbar {
+    width: 100%;
+}
+
+.rm-default a {
+    font-size: 2em;
+    padding: 0.5em;
+}
+
+.rm-default li li {
+    border: none;
+}
+
+.rm-default li ul {
+    background-color: @primaryColor;
+    box-shadow: @boxShadow;
+    // border: 1px solid @darkGrey;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.rm-default ul li {
+    box-shadow: none;
+}
+
+.my-navbar a {
+    text-decoration: none;
+}
+
+//
+/* Flash */
+//
+.region-flash {
+    #desinax-vgrid.column(@columns);
+    height: 250px;
+}
+
+//
+/* Breadcrumb */
+//
+.region-breadcrumb {
+    // background-color: @lightGreen;
+    // border: 1px solid @darkGrey;
+    #desinax-vgrid.column(@columns);
+}
+
+.breadcrumb-list ul {
+    margin-bottom: 1em; // vet inte varför denna har fått 24px via desinax men ingen margin-top...
+}
+
+.breadcrumb-list li {
+    display: inline-block;
+}
+
+//
+/* Main */
+//
+.inner-wrap-main .row {
+    padding: 0.5em 0;
+}
+
+.region-main {
+    #desinax-vgrid.column(@columns);
+    // background-color: @lightGreen;
+    // border: 1px solid @darkGrey;
+    padding: 0 0.5em;
+}
+
+.has-sidebar-left,
+.has-sidebar-right {
+    #desinax-vgrid.column(@columns * 3 / 4);
+}
+
+.region-main.has-sidebar-left.has-sidebar-right {
+    #desinax-vgrid.column(@columns / 2);
+}
+
+.region-sidebar-right,
+.region-sidebar-left {
+    padding: 0 0.5em;
+    margin-top: 24px;
+    #desinax-vgrid.column(@columns * 1 / 4);
+}
+
+.next-previous a {
+    text-decoration: none;
+}
+
+.right,
+.next {
+    float: right;
+}
+
+.left,
+.previous {
+    float: left;
+}
+
+//
+/* byline */
+//
+.inner-wrap-after-main .row {
+    padding: 0.5em;
+}
+
+.inner-wrap-after-main .region-after-main h1:first-of-type {
+    #desinax-vgrid.column(@columns);
+    margin-top: 0;
+}
+
+.inner-wrap-after-main .region-after-main figure {
+    #desinax-vgrid.column(@columns * 1 / 4);
+    margin-top: 0;
+    margin-bottom: 0;
+
+    img {
+        max-width: 100%;
+    }
+}
+
+.inner-wrap-after-main .region-after-main p:first-of-type {
+    #desinax-vgrid.column(@columns * 1 / 4);
+    margin-top: 0;
+}
+
+//
+/* Footer */
+//
+.footer-column {
+    #desinax-vgrid.column(@columns / 3);
+    min-height: 175px;
+    padding: 0.5rem;
+}
+
+.footer-column h4:first-of-type {
+    text-align: center;
+    margin: 12px 0;
+}
+
+.site-footer {
+    #desinax-vgrid.column(@columns);
+    text-align: center;
+    font-size: 2rem;
+}
+
+//
+// Delete background colors on elements inside inner-wrap
+//
+.hgrid .region-breadcrumb,
+.vgrid .region-breadcrumb,
+.hgrid .region-main,
+.vgrid .region-main,
+.hgrid .footer-column,
+.vgrid .footer-column {
+    background-color: transparent;
+}
