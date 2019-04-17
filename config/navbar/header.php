@@ -68,25 +68,30 @@ return [
             "url" => "style",
             "title" => "Välj stylesheet.",
         ],
+        // [
+        //     "text" => "Docs",
+        //     "url" => "dokumentation",
+        //     "title" => "Dokumentation av ramverk och liknande.",
+        // ],
+        // [
+        //     "text" => "Test &amp; Lek",
+        //     "url" => "lek",
+        //     "title" => "Testa och lek med test- och exempelprogram",
+        // ],
+        // [
+        //     "text" => "Test Markdown",
+        //     "url" => "test",
+        //     "title" => "Testa olika markdown grejer",
+        // ],
+        // [
+        //     "text" => "Anax dev",
+        //     "url" => "dev",
+        //     "title" => "Anax development utilities",
+        // ],
         [
-            "text" => "Docs",
-            "url" => "dokumentation",
-            "title" => "Dokumentation av ramverk och liknande.",
-        ],
-        [
-            "text" => "Test &amp; Lek",
-            "url" => "lek",
-            "title" => "Testa och lek med test- och exempelprogram",
-        ],
-        [
-            "text" => "Test Markdown",
-            "url" => "test",
-            "title" => "Testa olika markdown grejer",
-        ],
-        [
-            "text" => "Anax dev",
-            "url" => "dev",
-            "title" => "Anax development utilities",
+            "text" => "Guess game",
+            "url" => "guess-game",
+            "title" => "Spela gissa numret",
         ],
     ],
 ];

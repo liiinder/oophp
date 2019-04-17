@@ -1,0 +1,5 @@
+git add .
+git status
+git commit -m "First commit"
+git tag -a v1.0.0 -m "ett meddelande"
+git push && git push --tags

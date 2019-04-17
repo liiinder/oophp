@@ -145,3 +145,21 @@ h5,
 h6 {
     border-bottom: 1px solid @darkGrey;
 }
+
+/**
+* Design for the buttons in the game
+*/
+.game input {
+    margin: 0.3rem 0;
+    padding: 2rem;
+    border-radius: 0.2rem;
+    font-size: 2rem;
+}
+
+.game input[type=number] {
+    #desinax-vgrid.column(@columns);
+}
+
+.game input[type=submit] {
+    #desinax-vgrid.column(@columns * 1 / 3);
+}
