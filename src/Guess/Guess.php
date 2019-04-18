@@ -7,9 +7,11 @@ class Guess
 {
     /**
      * @var int $number   The current secret number.
+     */
+     private $number;
+    /**
      * @var int $tries    Number of tries a guess has been made.
      */
-    private $number;
     private $tries;
 
 
@@ -24,15 +26,15 @@ class Guess
      */
     public function __construct(int $number = -1, int $tries = 6)
     {
-        $this->number = ($number == -1) ? $this->random() : $number;
+        $this->number = ($number === -1) ? $this->random() : $number;
         $this->tries = $tries;
     }
 
 
     /**
-     * Randomize the secret number between 1 and 100 to initiate a new game.
+     * Randomize a number between 1 and 100.
      *
-     * @return void
+     * @return int A number between 1 and 100.
      */
     public function random()
     {
