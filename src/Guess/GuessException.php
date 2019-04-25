@@ -1,5 +1,6 @@
 <?php
 namespace Linder\Guess;
+
 /**
  * Exception class for GuessException.
  */

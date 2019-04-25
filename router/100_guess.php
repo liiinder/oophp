@@ -23,9 +23,9 @@ $app->router->get("guess/init", function () use ($app) {
  */
 $app->router->get("guess/play", function () use ($app) {
     $title = "Gissa numret";
-    
+
     // If we refresh the guess/play and dont have a SESSION, restart game.
-    if(!isset($_SESSION["number"])) {
+    if (!isset($_SESSION["number"])) {
         return $app->response->redirect("guess/init");
     }
 
@@ -54,13 +54,13 @@ $app->router->post("guess/post-process", function () use ($app) {
     $cheat  = $_POST["cheat"] ?? null;
 
     // If we post the guess/play after the session timed out, restart game.
-    if(!isset($_SESSION["number"])) {
+    if (!isset($_SESSION["number"])) {
         return $app->response->redirect("guess/init");
     }
 
     if ($make) {
         // Make a guess
-        $game = New Linder\Guess\Guess($_SESSION["number"], $_SESSION["tries"]);
+        $game = new Linder\Guess\Guess($_SESSION["number"], $_SESSION["tries"]);
         try {
             $_SESSION["res"] = $game->makeGuess($guess);
             $_SESSION["tries"] = $game->tries();
@@ -72,7 +72,7 @@ $app->router->post("guess/post-process", function () use ($app) {
         return $app->response->redirect("guess/init");
     } elseif ($cheat) {
         // cheat
-        $_SESSION["res"] = "The secret number is " . $_SESSION["number"];;
+        $_SESSION["res"] = "The secret number is " . $_SESSION["number"];
     }
 
     return $app->response->redirect("guess/play");

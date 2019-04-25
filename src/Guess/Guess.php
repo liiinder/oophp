@@ -1,5 +1,6 @@
 <?php
 namespace Linder\Guess;
+
 /**
  * Guess my number, a class supporting the game through GET, POST and SESSION.
  */
@@ -8,7 +9,7 @@ class Guess
     /**
      * @var int $number   The current secret number.
      */
-     private $number;
+    private $number;
     /**
      * @var int $tries    Number of tries a guess has been made.
      */
@@ -70,7 +71,7 @@ class Guess
     /**
      * Make a guess, decrease remaining guesses and return a string stating
      * if the guess was correct, too low or to high or if no guesses remains.
-     * 
+     *
      * @throws GuessException when guessed number is out of bounds.
      *
      * @return string to show the status of the guess made.
@@ -86,12 +87,11 @@ class Guess
         $this->tries--;
 
         // echo ($number > $this->number());
-        if ($number === $this->number()) {
-            return "You guessed {$number}, your guess is right.";
-        } elseif ($number > $this->number()) {
+        if ($number > $this->number()) {
             return "You guessed {$number}, your guess is too high.";
         } elseif ($number < $this->number()) {
             return "You guessed {$number}, your guess is too low.";
         }
+        return "You guessed {$number}, your guess is right.";
     }
 }

@@ -25,16 +25,16 @@ return [
                         "url" => "redovisning/kmom01",
                         "title" => "Redovisning för kmom01.",
                     ],
-                    // [
-                    //     "text" => "Kmom02",
-                    //     "url" => "redovisning/kmom02",
-                    //     "title" => "Redovisning för kmom02.",
-                    // ],
-                    // [
-                    //     "text" => "Kmom03",
-                    //     "url" => "redovisning/kmom03",
-                    //     "title" => "Redovisning för kmom03.",
-                    // ],
+                    [
+                        "text" => "Kmom02",
+                        "url" => "redovisning/kmom02",
+                        "title" => "Redovisning för kmom02.",
+                    ],
+                    [
+                        "text" => "Kmom03",
+                        "url" => "redovisning/kmom03",
+                        "title" => "Redovisning för kmom03.",
+                    ],
                     // [
                     //     "text" => "Kmom04",
                     //     "url" => "redovisning/kmom04",
@@ -92,6 +92,11 @@ return [
             "text" => "Guess game",
             "url" => "guess-game",
             "title" => "Spela gissa numret",
+        ],
+        [
+            "text" => "Pig game",
+            "url" => "hundred",
+            "title" => "Tärningsspel 100",
         ],
     ],
 ];

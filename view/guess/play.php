@@ -14,5 +14,5 @@ namespace Anax\View;
         <br>
         <input type="submit" name="make" value="Make guess"><input type="submit" name="reset" value="Reset game"><input type="submit" name="cheat" value="Cheat">
     </form>
-    <h3><?= $content ?></h3>
+    <?php echo isset($content) ? "<h3>{$content}</h3>" : null ?>
 </article>
