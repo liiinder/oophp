@@ -29,7 +29,7 @@ class Player
 
 
     /**
-     * Constructor to initiate the dicehand with a number of dices.
+     * Constructor to initiate a player with a number of dices.
      *
      * @param bool $player if its a player or a computer
      * @param int $amount Number of dices to create, defaults to five.

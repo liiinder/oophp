@@ -95,7 +95,7 @@ return [
         ],
         [
             "text" => "Pig game",
-            "url" => "hundred",
+            "url" => "hundred-game",
             "title" => "Tärningsspel 100",
         ],
     ],

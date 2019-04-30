@@ -42,7 +42,7 @@ EOD;
         echo "</h3>";
     }
     ?>
-    <form class="game" method="POST" action="post-process">
+    <form class="game" method="POST" action="postProcess">
         <?php
         if (!$winner) {
             if ($player->isSafe()) {
