@@ -11,7 +11,7 @@ return [
         [
             "info" => "Sample controller app style.",
             "mount" => "hundred2",
-            "handler" => "\Linder\Hundred\HundredController",
+            "handler" => "\Linder\Hundred2\HundredController",
         ],
         // [
         //     "info" => "Sample controller di style.",

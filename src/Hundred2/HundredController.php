@@ -1,6 +1,6 @@
 <?php
 
-namespace Linder\Hundred;
+namespace Linder\Hundred2;
 
 use Anax\Commons\AppInjectableInterface;
 use Anax\Commons\AppInjectableTrait;
@@ -48,21 +48,6 @@ class HundredController implements AppInjectableInterface
 
 
 
-    /**
-     * This is the index method action, it handles:
-     * ANY METHOD mountpoint
-     * ANY METHOD mountpoint/
-     * ANY METHOD mountpoint/index
-     *
-     * @return string
-     */
-    public function indexAction() : string
-    {
-        // Deal with the action and return a response.
-        return "index page ";
-    }
-
-
 
     /**
      * This sample method dumps the content of $app.
@@ -86,7 +71,7 @@ class HundredController implements AppInjectableInterface
     {
         $game = new Hundred();
 
-        $_SESSION["hundred"] = $game;
+        $this->app->session->set('hundred', $game);
 
         return $this->app->response->redirect("hundred2/play");
     }
@@ -99,14 +84,15 @@ class HundredController implements AppInjectableInterface
         $title = "Tärningsspel 100";
 
         // If we refresh the hundred/play and dont have a SESSION, restart game.
-        if (!isset($_SESSION["hundred"])) {
+        if ($this->app->session->get("hundred") == null) {
             return $this->app->response->redirect("hundred2/init");
         }
         
         // Get variables from session and save to data object
-        $game = $_SESSION['hundred'];
+        $game = $this->app->session->get('hundred');
+
         $data = [
-            "content" => $_SESSION["res"] ?? null,
+            "content" => $this->app->session->get('res'),
             "game" => $game
         ];
 
@@ -124,24 +110,25 @@ class HundredController implements AppInjectableInterface
     public function postProcessAction() : object
     {
         // Deal with incoming variables
-        $roll  = $_POST["roll"] ?? null;
-        $save  = $_POST["save"] ?? null;
-        $pass  = $_POST["pass"] ?? null;
-        $init  = $_POST["init"] ?? null;
+        $roll = $this->app->request->getPost('roll');
+        $save = $this->app->request->getPost('save');
+        $init = $this->app->request->getPost('init');
 
         // If we post the guess/play after the session timed out, restart game.
-        if (!isset($_SESSION["hundred"]) || $init) {
+        if ($this->app->session->get("hundred") == null || $init) {
             return $this->app->response->redirect("hundred2/init");
         }
 
         // Get variables from session
-        $game = $_SESSION['hundred'];
+        $game = $this->app->session->get('hundred');
 
         if ($roll) {
-            $game->play("roll");
+            $game->roll();
         } elseif ($save) {
-            $game->play("save");
+            $game->save();
         }
+
+        $this->app->session->set('hundred', $game);
 
         return $this->app->response->redirect("hundred2/play");
     }

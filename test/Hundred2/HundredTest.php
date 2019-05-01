@@ -1,6 +1,6 @@
 <?php
 
-namespace Linder\Hundred;
+namespace Linder\Hundred2;
 
 use PHPUnit\Framework\TestCase;
 
@@ -17,7 +17,7 @@ class HundredCreateObjectTest extends TestCase
     public function testCreateObjectNoArguments()
     {
         $game = new Hundred();
-        $this->assertInstanceOf("\Linder\Hundred\Hundred", $game);
+        $this->assertInstanceOf("\Linder\Hundred2\Hundred", $game);
 
         $res = sizeof($game->getPlayers());
         $exp = 2;
@@ -51,7 +51,7 @@ class HundredCreateObjectTest extends TestCase
     public function testCreateObjectFirstArgument()
     {
         $game = new Hundred(4);
-        $this->assertInstanceOf("\Linder\Hundred\Hundred", $game);
+        $this->assertInstanceOf("\Linder\Hundred2\Hundred", $game);
 
         $res = sizeof($game->getPlayers());
         $exp = 5;
@@ -71,7 +71,7 @@ class HundredCreateObjectTest extends TestCase
     public function testCreateObjectTwoArguments()
     {
         $game = new Hundred(4, 3);
-        $this->assertInstanceOf("\Linder\Hundred\Hundred", $game);
+        $this->assertInstanceOf("\Linder\Hundred2\Hundred", $game);
 
         $res = sizeof($game->getPlayers());
         $exp = 7;
@@ -98,7 +98,7 @@ class HundredCreateObjectTest extends TestCase
     public function testCreateObjectThirdArgument()
     {
         $game = new Hundred(2, 1, 5);
-        $this->assertInstanceOf("\Linder\Hundred\Hundred", $game);
+        $this->assertInstanceOf("\Linder\Hundred2\Hundred", $game);
 
         $res = $game->getPlayers()[0]->getHandSize();
         $exp = 5;
@@ -113,7 +113,7 @@ class HundredCreateObjectTest extends TestCase
     public function testCreateObjectFourthArgument()
     {
         $game = new Hundred(2, 1, 5, 30);
-        $this->assertInstanceOf("\Linder\Hundred\Hundred", $game);
+        $this->assertInstanceOf("\Linder\Hundred2\Hundred", $game);
 
         $res = $game->getMaxScore();
         $exp = 30;
@@ -126,12 +126,12 @@ class HundredCreateObjectTest extends TestCase
     public function testPlayRoll()
     {
         // Create a game with 100 dices
-        $game = new Hundred(2, 1, 100, 100);
-        $this->assertInstanceOf("\Linder\Hundred\Hundred", $game);
+        $game = new Hundred(2, 0, 100, 100);
+        $this->assertInstanceOf("\Linder\Hundred2\Hundred", $game);
 
-        $cur = $game->getPlayers()[$game->getTurn()];
+        $cur = $game->getPlayer();
         $previousRoll = $cur->getValues();
-        $game->play("roll");
+        $game->roll();
         $currentRoll = $cur->getValues();
         $this->assertNotEquals($previousRoll, $currentRoll);
     }
@@ -143,19 +143,19 @@ class HundredCreateObjectTest extends TestCase
     {
         // Create a game with 10000 dices
         $game = new Hundred(2, 1, 10000, 100);
-        $this->assertInstanceOf("\Linder\Hundred\Hundred", $game);
+        $this->assertInstanceOf("\Linder\Hundred2\Hundred", $game);
 
         $cur = $game->getPlayers()[$game->getTurn()];
         $this->assertTrue($cur->isSafe());
-        $game->play("roll");
+        $game->roll();
         if (in_array(1, $cur->getValues())) {
             $this->assertFalse($cur->isSafe());
-            $this->assertEquals(0, $cur->getRound());
+            $this->assertEquals(0, $cur->getRoundScore());
         } else {
             $this->assertTrue($cur->isSafe());
-            $this->assertEquals($cur->getRound(), $cur->getSum());
+            $this->assertEquals($cur->getRoundScore(), $cur->getSum());
         }
-        $game->play("save");
+        $game->save();
         $this->assertTrue($cur->isSafe());
     }
 
@@ -168,24 +168,48 @@ class HundredCreateObjectTest extends TestCase
     {
         // A game without computers
         $game = new Hundred(2, 0);
-        $this->assertInstanceOf("\Linder\Hundred\Hundred", $game);
+        $this->assertInstanceOf("\Linder\Hundred2\Hundred", $game);
 
         for ($i = 0; $i < 100; $i++) {
             $cur = $game->getPlayers()[$game->getTurn()];
             $this->assertTrue($cur->isSafe());
-            $prevRound = $cur->getRound();
-            $game->play("roll");
+            $prevRound = $cur->getRoundScore();
+            $game->roll();
             if (in_array(1, $cur->getValues())) {
                 $this->assertFalse($cur->isSafe());
-                $this->assertEquals(0, $cur->getRound());
+                $this->assertEquals(0, $cur->getRoundScore());
             } else {
                 $this->assertTrue($cur->isSafe());
-                $res = $cur->getRound();
+                $res = $cur->getRoundScore();
                 $exp = $prevRound + $cur->getSum();
                 $this->assertEquals($exp, $res);
             }
-            $game->play("save");
+            $game->save();
             $this->assertTrue($cur->isSafe());
         }
+    }
+
+    /**
+     * Test histogram getHistogramSerie()
+     * And allThrows
+     */
+    public function testGetHistogramSerie()
+    {
+        $game = new Hundred(2, 0);
+        $this->assertInstanceOf("\Linder\Hundred2\Hundred", $game);
+
+        $throws = [];
+
+        for ($i = 0; $i < 10; $i++) {
+            $player = $game->getPlayer();
+            if ($player->isSafe()) {
+                $game->roll();
+                $throws = array_merge($throws, $player->getValues());
+            } else {
+                $game->save();
+            }
+            $this->assertEquals($game->getHistogramSerie(), $player->getRoundValues());
+        }
+        $this->assertEquals($game->getAllThrows(), $throws);
     }
 }
