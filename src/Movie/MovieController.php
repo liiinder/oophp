@@ -63,98 +63,97 @@ class MovieController implements AppInjectableInterface
     }
 
     /**
-     * This is the index method action, it handles:
-     * ANY METHOD mountpoint
-     * ANY METHOD mountpoint/
-     * ANY METHOD mountpoint/index
+     * This is the index method action
      *
-     * @return string
+     * @return object
      */
-    public function indexAction() : object
+    public function showAction() : object
     {
-        // Deal with the action and return a response.
-        $title = "MovieDatabase";
+        $title = "Movie database | oophp";
 
-        $data = [
-            "content" => "test",
-            "game" => "over"
-        ];
+        $this->app->page->add("movie/header");
+        $this->app->db->connect();
+        $sql = "SELECT * FROM movie;";
+        $res = $this->app->db->executeFetchAll($sql);
 
-        $this->app->page->add("movie/index", $data);
-
+        $this->app->page->add("movie/show-movies", [
+            "res" => $res,
+        ]);
+        
         return $this->app->page->render([
             "title" => $title,
         ]);
     }
 
+    public function titleAction() : object
+    {
+        $title = "Movie database | oophp";
+        $res = [];
+        $this->app->page->add("movie/header");
 
-
-    // /**
-    //  * Init the game
-    //  */
-    // public function initAction() : object
-    // {
-    //     $game = new Hundred();
-
-    //     $this->app->session->set('hundred', $game);
-
-    //     return $this->app->response->redirect("hundred2/play");
-    // }
-
-    // /**
-    //  * Play the game
-    //  */
-    // public function playAction() : object
-    // {
-    //     $title = "Tärningsspel 100";
-
-    //     // If we refresh the hundred/play and dont have a SESSION, restart game.
-    //     if ($this->app->session->get("hundred") == null) {
-    //         return $this->app->response->redirect("hundred2/init");
-    //     }
+        $this->app->page->add("movie/search-title", [
+            "res" => $res,
+            "search" => ""
+        ]);
         
-    //     // Get variables from session and save to data object
-    //     $game = $this->app->session->get('hundred');
+        return $this->app->page->render([
+            "title" => $title,
+        ]);
+    }
 
-    //     $data = [
-    //         "content" => $this->app->session->get('res'),
-    //         "game" => $game
-    //     ];
+    public function yearAction() : object
+    {
+        $title = "Movie database | oophp";
+        $res = [];
+        $this->app->page->add("movie/header");
 
-    //     $this->app->page->add("hundred2/play", $data);
-    //     // $app->page->add("hundred/debug");
+        $this->app->page->add("movie/search-year", [
+            "res" => $res,
+            "year1" => 1950,
+            "year2" => 2050
+        ]);
+        
+        return $this->app->page->render([
+            "title" => $title,
+        ]);
+    }
 
-    //     return $this->app->page->render([
-    //         "title" => $title,
-    //     ]);
-    // }
+    public function searchActionPost() : object
+    {
+        $title = "Movie database | oophp";
+        $res = [];
+        $this->app->page->add("movie/header");
 
-    // /**
-    //  * Post roll
-    //  */
-    // public function postProcessAction() : object
-    // {
-    //     // Deal with incoming variables
-    //     $roll = $this->app->request->getPost('roll');
-    //     $save = $this->app->request->getPost('save');
-    //     $init = $this->app->request->getPost('init');
+        $searchpage = $this->app->request->getPost("route");
+        if ($searchpage == "searchtitle") {
+            $search = $this->app->request->getPost("search");
+            $sql = "SELECT * FROM movie WHERE title LIKE ?;";
+            $params = [$search];
+            $this->app->page->add("movie/search-title", [
+                "res" => $res,
+                "search" => $search
+            ]);
+        } elseif ($searchpage == "searchyear") {
+            $year1 = $this->app->request->getPost("year1");
+            $year2 = $this->app->request->getPost("year2");
+            $sql = "SELECT * FROM movie WHERE year >= ? AND year <= ?;";
+            $params = [$year1, $year2];
+            $this->app->page->add("movie/search-year", [
+                "res" => $res,
+                "year1" => $year1,
+                "year2" => $year2,
+            ]);
+        }
 
-    //     // If we post the guess/play after the session timed out, restart game.
-    //     if ($this->app->session->get("hundred") == null || $init) {
-    //         return $this->app->response->redirect("hundred2/init");
-    //     }
+        $this->app->db->connect();
+        $res = $this->app->db->executeFetchAll($sql, $params);
 
-    //     // Get variables from session
-    //     $game = $this->app->session->get('hundred');
+        $this->app->page->add("movie/show-movies", [
+            "res" => $res,
+        ]);
 
-    //     if ($roll) {
-    //         $game->roll();
-    //     } elseif ($save) {
-    //         $game->save();
-    //     }
-
-    //     $this->app->session->set('hundred', $game);
-
-    //     return $this->app->response->redirect("hundred2/play");
-    // }
+        return $this->app->page->render([
+            "title" => $title,
+        ]);
+    }
 }

@@ -41,11 +41,11 @@ return [
                         "url" => "redovisning/kmom04",
                         "title" => "Redovisning för kmom04.",
                     ],
-                    // [
-                    //     "text" => "Kmom05",
-                    //     "url" => "redovisning/kmom05",
-                    //     "title" => "Redovisning för kmom05.",
-                    // ],
+                    [
+                        "text" => "Kmom05",
+                        "url" => "redovisning/kmom05",
+                        "title" => "Redovisning för kmom05.",
+                    ],
                     // [
                     //     "text" => "Kmom06",
                     //     "url" => "redovisning/kmom06",
@@ -99,5 +99,15 @@ return [
             "url" => "hundred-game",
             "title" => "Tärningsspel 100",
         ],
+        [
+            "text" => "Pig2",
+            "url" => "hundred2/init",
+            "title" => "Tärningsspel 100 v.2",
+        ],
+        [
+            "text" => "Movie",
+            "url" => "movie/show",
+            "title" => "Movie database"
+        ]
     ],
 ];
