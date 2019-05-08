@@ -179,10 +179,11 @@ class MovieController implements AppInjectableInterface
     public function selectActionPost() : object
     {
         $title = "Movie database";
-
+        $res = [];
         $add = $this->app->request->getPost("doAdd");
         $edit = $this->app->request->getPost("doEdit");
         $del = $this->app->request->getPost("doDelete");
+        $reset = $this->app->request->getPost("doReset");
         $movie = $this->app->request->getPost("movieId");
         
         $this->app->page->add("movie/header");
@@ -193,6 +194,32 @@ class MovieController implements AppInjectableInterface
             $this->app->db->execute($sql, ["A title", 2017, "img/noimage.png"]);
             $movie = $this->app->db->lastInsertId();
             $edit = true;
+        } elseif ($reset) {
+            if ($_SERVER["SERVER_NAME"] === "www.student.bth.se") {
+                $file = ANAX_INSTALL_PATH . '/sql/movie/setup.sql';
+                $mysql = '/usr/bin/mysql';
+            } else {
+                $file   = 'C:\cygwin64\home\LINDER\dbwebb-kurser\oophp\me\redovisa\sql\movie\setup.sql';
+                $mysql  = 'C:\xampp\mysql\bin\mysql.exe';
+            }
+            // Extract hostname and databasename from dsn
+            $dbConfig = $this->app->configuration->load("database")['config'];
+            $dsnDetail = [];
+            preg_match("/mysql:host=(.+);dbname=([^;.]+)/", $dbConfig["dsn"], $dsnDetail);
+            $host = $dsnDetail[1];
+            $database = $dsnDetail[2];
+            $login = $dbConfig["username"];
+            $password = $dbConfig["password"];
+            $command = "$mysql -h{$host} -u{$login} -p{$password} $database < $file 2>&1";
+            $output = [];
+            $status = null;
+            $res = exec($command, $output, $status);
+            $output = "<p>The command was: <code>$command</code>.<br>The command exit status was $status."
+                . "<br>The output from the command was:</p><pre>"
+                . print_r($output, 1);
+            $this->app->page->add("movie/test", [
+                "output" => $output
+            ]);
         }
         if ($movie && $edit) {
             $sql = "SELECT * FROM movie WHERE id = ?;";

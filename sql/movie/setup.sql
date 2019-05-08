@@ -35,11 +35,14 @@ CREATE TABLE `movie`
 
 DELETE FROM `movie`;
 INSERT INTO `movie` (`title`, `year`, `image`) VALUES
-    ('Pulp fiction', 1994, 'img/pulp-fiction.jpg'),
-    ('American Pie', 1999, 'img/american-pie.jpg'),
-    ('Pokémon The Movie 2000', 1999, 'img/pokemon.jpg'),  
-    ('Kopps', 2003, 'img/kopps.jpg'),
-    ('From Dusk Till Dawn', 1996, 'img/from-dusk-till-dawn.jpg')
+    ('Pulp fiction', 1994, 'img/movie/pulp-fiction.jpg'),
+    ('American Pie', 1999, 'img/movie/american-pie.jpg'),
+    ('Pokémon The First Movie', 1998, 'img/movie/pokemon.jpg'),  
+    ('Kopps', 2003, 'img/movie/kopps.jpg'),
+    ('From Dusk Till Dawn', 1996, 'img/movie/from-dusk-till-dawn.jpg'),
+    ('New Kids Turbo', 2010, 'img/movie/newkidsturbo.jpg'),
+    ('The Cannonball Run', 1981, 'img/movie/cannonball-run.jpg'),
+    ('Ronal Barbaren', 2011, 'img/movie/ronalbarbaren.jpg')
 ;
 
 SELECT * FROM `movie`;

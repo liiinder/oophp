@@ -17,7 +17,7 @@ namespace Anax\View;
     <tr>
         <td><?= $id ?></td>
         <td><?= $row->id ?></td>
-        <td><img src="<?= "../image/movie/" . explode("/", $row->image)[1] ?>?w=100&h=100&cf" alt="picture from <?= $row->title ?>"></td>
+        <td><img src="../image/<?= substr($row->image, 4) ?>?h=100" alt="picture from <?= $row->title ?>"></td>
         <td><?= $row->title ?></td>
         <td><?= $row->year ?></td>
     </tr>

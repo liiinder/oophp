@@ -24,6 +24,9 @@ namespace Anax\View;
         <input type="submit" name="doEdit" value="Edit">
         <input type="submit" name="doDelete" value="Delete">
     </p>
-    <p><a href="show">Show all</a></p>
+    <p>
+        <input type="submit" name="doReset" value="Reset database">
+    </p>
+    <p><a href="<?= url("movie/show") ?>">Show all</a></p>
     </fieldset>
 </form>

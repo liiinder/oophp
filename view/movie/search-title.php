@@ -14,7 +14,7 @@ namespace Anax\View;
     </p>
     <p>
         <input type="submit" name="doSearch" value="Search">
-        <a href="show">Show all</a>
+        <a href="<?= url("movie/show") ?>">Show all</a>
     </p>
     </fieldset>
 </form>

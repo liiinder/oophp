@@ -31,7 +31,7 @@ namespace Anax\View;
         <input type="reset" name="doReset" value="Reset">
     </p>
     <p>
-        <a href="select">Select movie</a>
+        <a href="<?= url("movie/select") ?>">Select movie</a>
     </p>
     </fieldset>
 </form>
