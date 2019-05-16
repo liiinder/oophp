@@ -1,6 +1,6 @@
 <?php
 
-namespace Linder\TextFilter;
+namespace Linder\MyTextFilter;
 
 require __DIR__ . "/../../vendor/autoload.php";
 
@@ -22,7 +22,7 @@ class MyTextFilter
         "bbcode"    => "bbcode2html",
         "link"      => "makeClickable",
         "markdown"  => "markdown",
-        "nl2br"     => "nl2br",
+        "nl2br"     => "nl2br"
     ];
 
 
@@ -128,6 +128,6 @@ class MyTextFilter
      */
     public function nl2br($text)
     {
-        return nl2br($text);
+        return str_replace(array("\r\n", "\r", "\n"), "<br>", $text);
     }
 }

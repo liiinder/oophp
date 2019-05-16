@@ -110,7 +110,7 @@ return [
         ],
         [
             "text" => "TextFilter",
-            "url" => "mytextfilter/index",
+            "url" => "mytextfilter",
             "title" => "Mitt textfilter"
         ]
     ],

@@ -8,7 +8,7 @@
 /**
  * Init the game and redirect to play the game.
  */
-$app->router->get("textfilter/index", function () use ($app) {
+$app->router->get("mytextfilter", function () use ($app) {
     $title = "Filtrera texten";
 
     // If we refresh the guess/play and dont have a SESSION, restart game.
@@ -41,14 +41,14 @@ $app->router->post("mytextfilter/post-process", function () use ($app) {
 
     // Deal with incoming variables
     $myfilter = $app->session->get("myfilter");
-    $myfilter["bbcode"]   = $_POST["bbcode"] ? "checked" : null;
-    $myfilter["link"]   = $_POST["link"] ? "checked" : null;
-    $myfilter["markdown"]   = $_POST["markdown"] ? "checked" : null;
-    $myfilter["nl2br"]   = $_POST["nl2br"] ? "checked" : null;
-    $myfilter["text"]   = $_POST["text"] ?? null;
+    $myfilter["bbcode"]   = $app->request->getPost("bbcode") ? "checked" : null;
+    $myfilter["link"]   = $app->request->getPost("link") ? "checked" : null;
+    $myfilter["markdown"]   = $app->request->getPost("markdown") ? "checked" : null;
+    $myfilter["nl2br"]   = $app->request->getPost("nl2br") ? "checked" : null;
+    $myfilter["text"]   = $app->request->getPost("text") ?? null;
     $activefilters = [];
     foreach (["bbcode", "link", "markdown", "nl2br"] as $filter) {
-        if ($app->session->has($filter)) {
+        if ($myfilter[$filter] === "checked") {
             array_push($activefilters, $filter);
         }
     }
