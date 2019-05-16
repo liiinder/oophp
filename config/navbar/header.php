@@ -45,11 +45,11 @@ return [
                         "url" => "redovisning/kmom05",
                         "title" => "Redovisning för kmom05.",
                     ],
-                    // [
-                    //     "text" => "Kmom06",
-                    //     "url" => "redovisning/kmom06",
-                    //     "title" => "Redovisning för kmom06.",
-                    // ],
+                    [
+                        "text" => "Kmom06",
+                        "url" => "redovisning/kmom06",
+                        "title" => "Redovisning för kmom06.",
+                    ],
                     // [
                     //     "text" => "Kmom10",
                     //     "url" => "redovisning/kmom10",
@@ -107,6 +107,11 @@ return [
             "text" => "Movie",
             "url" => "movie/show",
             "title" => "Movie database"
+        ],
+        [
+            "text" => "TextFilter",
+            "url" => "mytextfilter/index",
+            "title" => "Mitt textfilter"
         ]
     ],
 ];
