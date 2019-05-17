@@ -112,6 +112,11 @@ return [
             "text" => "TextFilter",
             "url" => "mytextfilter",
             "title" => "Mitt textfilter"
+        ],
+        [
+            "text" => "Blogg",
+            "url" => "blogg/main",
+            "title" => "Min blogg"
         ]
     ],
 ];
